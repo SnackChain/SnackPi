@@ -21,15 +21,17 @@ def doRequest(url):
 	return None
 
 def writei2c(device, data):
-    #Create the i2c bus
-    #data = "{1[1100000~BTC]}"
-    #bytesToSend = convertStringToBytes(data)
-    i2cBus.write_i2c_block_data(device, 0, data)
-    time.delay(500)
+	print(device)
+	print(data)
+	#Create the i2c bus
+	#data = "{1[1100000~BTC]}"
+	#bytesToSend = convertStringToBytes(data)
+	i2cBus.write_i2c_block_data(device, 0, data)
+	time.delay(500)
 
 class SnackOLED():
-	def __init__(self, id, device, cursor, textSize, text, textKey):
-		self.id = id
+	def __init__(self, address, device, cursor, textSize, text, textKey):
+		self.address = address
 		self.device = device
 		self.cursor = cursor
 		self.textSize = textSize
@@ -156,7 +158,7 @@ class RequestHandler(AbstractHandler):
 				clear = 1 if index == 0 else 0
 				i2cDataString = snack.i2cDataString(clear, values, results)
 				i2cDataBytes = convertStringToBytes(i2cDataString)
-				writei2c(snack.device, i2cDataBytes)
+				writei2c(snack.address, i2cDataBytes)
 
 
 			#payload = json['payload']
@@ -169,7 +171,7 @@ class RequestHandler(AbstractHandler):
 		else:
 			return super().handle(request)
 
-snackJSON = '{"instruction": "request","payload": {"url": "https://api.bitso.com/v3/ticker/?book=btc_mxn","trees": [["payload", "book"], ["payload", "high"], ["payload", "low"]],"operations": [["v1", "+", "v2"], ["r0", "*", "0.5"]],"snacks": [{"id": 8,"device": 1,"cursor": [0, 0],"textSize": 1,"text": null,"textKey": "v0"}, {"id": 8,"device": 1,"cursor": [0, 10],"textSize": 2,"text": null,"textKey": "r1"},{"id": 8,"device": 1,"cursor": [110, 25],"textSize": 1,"text": "MXN","textKey": null}]}}'
+snackJSON = '{"instruction": "request","payload": {"url": "https://api.bitso.com/v3/ticker/?book=btc_mxn","trees": [["payload", "book"], ["payload", "high"], ["payload", "low"]],"operations": [["v1", "+", "v2"], ["r0", "*", "0.5"]],"snacks": [{"address": 8,"device": 1,"cursor": [0, 0],"textSize": 1,"text": null,"textKey": "v0"}, {"address": 8,"device": 1,"cursor": [0, 10],"textSize": 2,"text": null,"textKey": "r1"},{"address": 8,"device": 1,"cursor": [110, 25],"textSize": 1,"text": "MXN","textKey": null}]}}'
 
 def start1():
 	#monkey.set_next(squirrel).set_next(dog)
