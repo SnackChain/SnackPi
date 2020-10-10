@@ -11,7 +11,7 @@ class RequestInstruction():
 		self.operations = operations
 		self.snacks = snacks
 
-class RequestHandler(AbstractHandler):
+class RequestHandler(AbstractInstructionHandler):
 	def doRequest(self, url):
 		response = requests.get(url)
 		if response.status_code == requests.codes.ok:
