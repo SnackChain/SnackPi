@@ -45,6 +45,6 @@ class OLEDHandler(AbstractSnackInputHandler):
 		else:
 			final_text = oled.static_value
 
-		string_data = "{" + str(snack.device) + "[" + str(oled.clear_value()) + str(oled.text_size) + cursor_x + cursor_y + "~" + final_text + "]}"
+		string_data = "{" + str(snack.device) + "[" + str(oled.clear_value()) + str(oled.text_size) + cursor_x + cursor_y + "~" + final_text
 		bytes_to_send = ByteProvider().from_string(string_data)
 		return bytes_to_send

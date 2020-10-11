@@ -95,24 +95,5 @@ class RequestHandler(AbstractInstructionHandler):
 			for operation in operations:
 				value = parameter_provider.get_values_from_dynamic(operation)
 				operation_client.handle(operation, parameter_provider)
-
-			print(parameter_provider.parameters.data['r'])
-
-			#Snacks
-			#snacks = requestInstructions.snacks
-			#print(snacks)
-			#for index, _snack in enumerate(snacks):
-			#	snack = SnackOLED(**_snack)
-			#	clear = 1 if index == 0 else 0
-			#	i2cDataString = snack.i2cDataString(clear, values, results)
-			#	i2cDataBytes = stringToBytes(i2cDataString)
-			#	i2cManager.writei2c(snack.address, i2cDataBytes)
-
-
-			#payload = json['payload']
-			#currency = payload['book']
-			#high = payload['high']
-			#last = payload['last']
-			#avergae = (float(high) + float(last)) / 2
 		else:
 			super().handle(request)
