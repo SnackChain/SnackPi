@@ -11,11 +11,12 @@ class SnackInputClient():
 		oled_handler = OLEDHandler()
 		self.handler = oled_handler
 
-	def handle(self, inputs, parameter_provider):
+	def handle(self, inputs, parameter_provider, i2c_provider):
 		snack_provider = SnackProvider()
 		for snack_dictionary in inputs:
 			snack = Snack(**snack_dictionary)
 			snack_device_id = snack_provider.get_device_id(snack)
-			self.handler.handle(snack_device_id, snack, parameter_provider)
+			bytes_to_send = self.handler.handle(snack_device_id, snack, parameter_provider)
+			i2c_provider.write(snack.address, bytes_to_send)
 
 			

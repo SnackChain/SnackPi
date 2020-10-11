@@ -1,4 +1,5 @@
 from handler.snack.handler import AbstractSnackInputHandler
+from provider.byte import ByteProvider
 
 class OLED():
 	def __init__(self, cursor, text_size, dinamic_value = None, static_value = None, clear = False):
@@ -25,25 +26,25 @@ class OLEDHandler(AbstractSnackInputHandler):
 	def handle(self, snack_device_id, snack, parameter_provider):
 		if snack_device_id == 'oled':
 			oled = OLED(**snack.parameters)
-			self.i2cDataString(snack, oled, parameter_provider)
+			return self.generate_data(snack, oled, parameter_provider)
 		else:
-			super().handle(snack_device_id, snack, parameter_provider)
+			return super().handle(snack_device_id, snack, parameter_provider)
 
-	def i2cDataString(self, snack, oled, parameter_provider):
-		cursorX = str(oled.cursor[0])
-		cursorY = str(oled.cursor[1])
-		for _ in range(3 - len(cursorX)):
-			cursorX = "0" + cursorX
-		for _ in range(2 - len(cursorY)):
-			cursorY = "0" + cursorY
+	def generate_data(self, snack, oled, parameter_provider):
+		cursor_x = str(oled.cursor[0])
+		cursor_y = str(oled.cursor[1])
+		for _ in range(3 - len(cursor_x)):
+			cursor_x = "0" + cursor_x
+		for _ in range(2 - len(cursor_y)):
+			cursor_y = "0" + cursor_y
 
-		finalText = ""
+		final_text = ""
 		if oled.is_dynamic():
-			finalText = parameter_provider.get_value_from_dynamic(oled.dinamic_value)
-			finalText = str(finalText)
+			final_text = parameter_provider.get_value_from_dynamic(oled.dinamic_value)
+			final_text = str(final_text)
 		else:
-			finalText = oled.static_value
+			final_text = oled.static_value
 
-		stringData = "{" + str(snack.device) + "[" + str(oled.clear_value()) + str(oled.text_size) + cursorX + cursorY + "~" + finalText + "]}"
-		print(stringData)
-		return stringData
+		string_data = "{" + str(snack.device) + "[" + str(oled.clear_value()) + str(oled.text_size) + cursor_x + cursor_y + "~" + final_text + "]}"
+		bytes_to_send = ByteProvider().from_string(string_data)
+		return bytes_to_send

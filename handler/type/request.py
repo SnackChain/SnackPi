@@ -1,7 +1,4 @@
 import requests
-from stringToBytes import *
-from i2cManager import *
-
 from handler.type.handler import AbstractInstructionHandler
 from handler.operation.client import OperationClient
 

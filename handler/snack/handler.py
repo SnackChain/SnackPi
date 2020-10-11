@@ -21,3 +21,5 @@ class AbstractSnackInputHandler(SnackInputHandler):
     def handle(self, snack_device_id, snack, parameter_provider):
         if self._next_handler:
             self._next_handler.handle(snack_device_id, snack, parameter_provider)
+        else:
+            return None
