@@ -12,4 +12,5 @@ class I2CProvider():
 			self.i2c_bus.write_i2c_block_data(snack_address, 0, bytes)
 			time.sleep(0.5)
 		else:
-			print("Nothing to write to i2c bus")
+			description = "Nothing to write to i2c bus, address: " + str(snack_address)
+			print(description)
