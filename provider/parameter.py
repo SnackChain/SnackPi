@@ -17,19 +17,24 @@ class ParametersData:
 class ParameterProvider():
     parameters = ParametersData()
 
-    def get_value_from_dynamic(self, _operation):
+    def get_values_from_dynamic(self, _operation):
         real_value = _operation
         #["v0", "split", "_"]
         # for index = 0
         for index, operation in enumerate(_operation):
-            if isinstance(operation, str):
-                #operator = 'v'
-                operator = operation[0]
-                #if operator in self.parameters.operatorsKeys:
-                if operator in self.parameters.operatorsKeys and operation in self.parameters.data[operator]:
-                    #newOperations[0] = parameters.data['v']['v0']
-                    real_value[index] = self.parameters.data[operator][operation]
+            temp_value = self.get_value_from_dynamic(operation)
+            if temp_value:
+                real_value[index] = temp_value
         return real_value
+
+    def get_value_from_dynamic(self, key):
+        if isinstance(key, str):
+            #operator = 'v'
+            operator = key[0]
+            #if operator in self.parameters.operatorsKeys:
+            if operator in self.parameters.operatorsKeys and key in self.parameters.data[operator]:
+                #newOperations[0] = parameters.data['v']['v0']
+                return self.parameters.data[operator][key]
 
     def store_value(self, value):
         self.parameters.add(self.parameters.values_key, value)

@@ -1,5 +1,9 @@
+from handler.operation.handler import OperationHandler
 from handler.operation.adittion import AdittionHandler
-from handler.operation.handler import *
+from handler.operation.multiplication import MultiplicationHandler
+from handler.operation.split import SplitHandler
+from handler.operation.subtraction import SubtractionHandler
+from handler.operation.textcase import TextcaseHandler
 
 class OperationClient():
     handler: OperationHandler

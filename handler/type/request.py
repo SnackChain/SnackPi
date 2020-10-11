@@ -1,5 +1,4 @@
 import requests
-from snackOLED import *
 from stringToBytes import *
 from i2cManager import *
 
@@ -71,9 +70,9 @@ class Network():
 
 class RequestHandler(AbstractInstructionHandler):
 
-	def handle(self, snack_instructions, parameter_provider):
-		if snack_instructions.instructions.type == "request":
-			payload = snack_instructions.instructions.payload
+	def handle(self, instructions, parameter_provider):
+		if instructions.type == "request":
+			payload = instructions.payload
 			request_instructions = RequestInstruction(**payload)
 			network = Network()
 			json = network.do_request(request_instructions.http_request)
@@ -97,7 +96,7 @@ class RequestHandler(AbstractInstructionHandler):
 			operations = response_modifiers.operations
 
 			for operation in operations:
-				value = parameter_provider.get_value_from_dynamic(operation)
+				value = parameter_provider.get_values_from_dynamic(operation)
 				operation_client.handle(operation, parameter_provider)
 
 			print(parameter_provider.parameters.data['r'])
