@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 ## Main structure for any snack instruction
-class SnackInstructionDataModel():
+class SnackInstructionsDataModel():
 	def __init__(self, instructions, snacks):
 		self.instructions = InstructionDataModel(**instructions)
 		self.snacks = SnacksDataModel(**snacks)

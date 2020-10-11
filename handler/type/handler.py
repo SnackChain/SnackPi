@@ -7,7 +7,7 @@ class InstructionHandler(ABC):
         pass
 
     @abstractmethod
-    def handle(self, request) -> Optional[str]:
+    def handle(self, snack_instructions, parameter_provider):
         pass
 
 class AbstractInstructionHandler(InstructionHandler):
@@ -18,8 +18,7 @@ class AbstractInstructionHandler(InstructionHandler):
         return handler
 
     @abstractmethod
-    def handle(self, request) -> str:
+    def handle(self, snack_instructions, parameter_provider):
         if self._next_handler:
-            return self._next_handler.handle(request)
-        return None
+            self._next_handler.handle(snack_instructions, parameter_provider)
         
