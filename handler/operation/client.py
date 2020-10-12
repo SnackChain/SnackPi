@@ -5,6 +5,7 @@ from handler.operation.split import SplitHandler
 from handler.operation.subtraction import SubtractionHandler
 from handler.operation.textcase import TextcaseHandler
 from handler.operation.comparison import ComparisonHandler
+from handler.operation.truncate import TruncateHandler
 
 class OperationClient():
     handler: OperationHandler
@@ -16,12 +17,14 @@ class OperationClient():
         split_handler = SplitHandler()
         textcase_handler = TextcaseHandler()
         comparison_handler = ComparisonHandler()
+        truncate_handler = TruncateHandler()
 
         adittion_handler.set_next(subtraction_handler)
         subtraction_handler.set_next(multiplication_handler)
         multiplication_handler.set_next(split_handler)
         split_handler.set_next(textcase_handler)
         textcase_handler.set_next(comparison_handler)
+        comparison_handler.set_next(truncate_handler)
 
         self.handler = adittion_handler
 
