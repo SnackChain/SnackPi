@@ -8,5 +8,5 @@ class InstructionClient():
         request_handler = RequestHandler()
         self.handler = request_handler
 
-    def handle(self, instructions, parameter_provider):
-        return self.handler.handle(instructions, parameter_provider)
+    def handle(self, instruction, parameter_provider):
+        return self.handler.handle(instruction, parameter_provider)

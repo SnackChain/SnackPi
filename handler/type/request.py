@@ -67,18 +67,18 @@ class Network():
 
 class RequestHandler(AbstractInstructionHandler):
 
-	def handle(self, instructions, parameter_provider):
-		if instructions.type == "request":
-			payload = instructions.payload
-			request_instructions = RequestInstruction(**payload)
+	def handle(self, instruction, parameter_provider):
+		if instruction.type == "request":
+			payload = instruction.payload
+			request_instruction = RequestInstruction(**payload)
 			network = Network()
-			json = network.do_request(request_instructions.http_request)
+			json = network.do_request(request_instruction.http_request)
 
 			if json is None:
 				print("error")
 				return
 
-			response_modifiers = request_instructions.response_modifiers
+			response_modifiers = request_instruction.response_modifiers
 			parameters_source = response_modifiers.parameters_source
 
 			#Get values based on the paths from json response

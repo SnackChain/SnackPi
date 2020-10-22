@@ -35,7 +35,7 @@ class BooleanHandler(AbstractSnackInputHandler):
 		string_data = "{" + str(snack.device) + "[" + bool_char
 		#Example
 		#{1[1
-		print(string_data)
+		#print(string_data)
 		bytes_to_send = ByteProvider().from_string(string_data)
-		print(bytes_to_send)
+		#print(bytes_to_send)
 		return bytes_to_send

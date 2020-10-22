@@ -1,16 +1,21 @@
 from __future__ import annotations
 
 ## Main structure for any snack instruction
-class SnackInstructions():
-	def __init__(self, instructions, snacks):
-		self.instructions = Instructions(**instructions)
+class SnackInstruction():
+	def __init__(self, instruction, snacks, event_time):
+		self.instruction = Instruction(**instruction)
 		self.snacks = Snacks(**snacks)
+		self.event_time = EventTime(**event_time)
 
-class Instructions():
-	def __init__(self, type, event_time, payload = None):
+class Instruction():
+	def __init__(self, type, payload = None):
 		self.type = type
-		self.event_time = event_time
 		self.payload = payload
+
+class EventTime():
+	def __init__(self, type, parameters = None):
+		self.type = type
+		self.parameters = parameters
 
 class Snacks():
 	def __init__(self, outputs = None, inputs = None):
