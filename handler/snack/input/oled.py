@@ -1,4 +1,4 @@
-from handler.snack.handler import AbstractSnackInputHandler
+from handler.snack.input.handler import AbstractSnackInputHandler
 from provider.byte import ByteProvider
 
 class OLED():

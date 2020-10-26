@@ -1,6 +1,7 @@
 import json
 from handler.type.client import InstructionClient
-from handler.snack.client import SnackInputClient
+from handler.snack.input.client import SnackInputClient
+from handler.snack.output.client import SnackOutputClient
 from handler.time.client import EventTimeClient
 from provider.parameter import ParameterProvider
 from model.instruction import SnackInstruction
@@ -18,29 +19,32 @@ def handle_instructions():
 		#Loads single set of instructions from JSON
 		snack_instruction_dictionary = json.loads(snack_json)
 		snack_instruction = SnackInstruction(**snack_instruction_dictionary)
-		#Object to store and provide all the dynamic parameters
+		#It stores and provide all the dynamic parameters
 		parameter_provider = ParameterProvider()
 		handle_time(snack_instruction, parameter_provider, i2c_provider)
 
 
 def handle_time(snack_instruction, parameter_provider, i2c_provider):
 	event_time_client = EventTimeClient()
-	event_time_client.handle(snack_instruction.event_time, handlle_instruction_inputs, snack_instruction, parameter_provider, i2c_provider)
+	event_time_client.handle(snack_instruction.event_time, handlle_instruction_snacks, snack_instruction, parameter_provider, i2c_provider)
 
-def handle_snacks_outputs():
-	return
-
-def handlle_instruction_inputs(snack_instruction, parameter_provider, i2c_provider):
+def handlle_instruction_snacks(snack_instruction, parameter_provider, i2c_provider):
+	handle_snacks_outputs(snack_instruction.snacks.outputs, parameter_provider, i2c_provider)
 	handle_instruction(snack_instruction.instruction, parameter_provider)
 	handle_snacks_inputs(snack_instruction.snacks.inputs, parameter_provider, i2c_provider)
 
+def handle_snacks_outputs(outputs, parameter_provider, i2c_provider):
+	#It reads data from snacks to storage it in parameter_provider
+	snack_output_client = SnackOutputClient()
+	snack_output_client.handle(outputs, parameter_provider, i2c_provider)
+
 def handle_instruction(instruction, parameter_provider):
-	#Object to manage all the instructions and generate the data to storage it in parameter_provider
+	#It manages the instruction (like a request) and generate the data to storage it in parameter_provider
 	instruction_client = InstructionClient()
 	instruction_client.handle(instruction, parameter_provider)
 
 def handle_snacks_inputs(inputs, parameter_provider, i2c_provider):
-	#Object to send the parameter_provider data to the snacks
+	#It sends the parameter_provider data to the snacks trough hardware the interface (i2c)
 	snack_input_client = SnackInputClient()
 	snack_input_client.handle(inputs, parameter_provider, i2c_provider)
 

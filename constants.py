@@ -1,0 +1,2 @@
+I2C_START_CHAR = '{'
+I2C_DATA_START_CHAR = '['

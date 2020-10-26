@@ -4,3 +4,9 @@ class ByteProvider():
 	    for character in string:
 	        bytes.append(ord(character))
 	    return bytes
+
+	def char_from_byte(self, buffer):
+		chars = []
+		for byte in buffer:
+			chars.append(char(byte))
+		return chars
