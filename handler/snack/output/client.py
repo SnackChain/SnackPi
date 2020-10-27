@@ -1,9 +1,9 @@
-from model.instruction import Snack
-from provider.snack import SnackProvider
+from model.instruction import SnackOutput
 from handler.snack.output.handler import SnackOutputHandler
+from handler.directive.handler import AbstractDirectiveHandler
 from handler.snack.output.output import OutputHandler
 
-class SnackOutputClient():
+class SnackOutputClient(AbstractDirectiveHandler):
 
 	handler: SnackOutputHandler
 
@@ -11,11 +11,12 @@ class SnackOutputClient():
 		output_handler = OutputHandler()
 		self.handler = output_handler
 
-	def handle(self, outputs, parameter_provider, i2c_provider):
-		snack_provider = SnackProvider()
-		if outputs != None:
-			for snack_dictionary in outputs:
-				snack = Snack(**snack_dictionary)
-				snack_output_info = snack_provider.get_output_device_length(snack)
-				buffers = i2c_provider.read(snack.address, snack_output_info.length)
-				self.handler.handle(snack_output_info, buffers, parameter_provider)
+	def handle(self, directive, parameter_provider, i2c_provider):
+		if directive.type == "snack.output":
+			for snack_output_dictionary in directive.data:
+				snack_output = SnackOutput(**snack_output_dictionary)
+				buffers = i2c_provider.read(snack_output.address, snack_output.length)
+				self.handler.handle(snack_output, buffers, parameter_provider)
+		else:
+			super().handle(directive, parameter_provider, i2c_provider)
+		

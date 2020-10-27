@@ -6,8 +6,9 @@ from handler.operation.subtraction import SubtractionHandler
 from handler.operation.textcase import TextcaseHandler
 from handler.operation.comparison import ComparisonHandler
 from handler.operation.truncate import TruncateHandler
+from handler.directive.handler import AbstractDirectiveHandler
 
-class OperationClient():
+class OperationClient(AbstractDirectiveHandler):
     handler: OperationHandler
 
     def __init__(self):
@@ -28,5 +29,10 @@ class OperationClient():
 
         self.handler = adittion_handler
 
-    def handle(self, operation, parameter_provider):
-        self.handler.handle(operation, parameter_provider)
+    def handle(self, directive, parameter_provider, i2c_provider):
+        if directive.type == "operation":
+            for operation in directive.data:
+                value = parameter_provider.get_values_from_dynamic(operation)
+                self.handler.handle(operation, parameter_provider)
+        else:
+            super().handle(directive, parameter_provider, i2c_provider)

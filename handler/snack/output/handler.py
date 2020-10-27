@@ -7,7 +7,7 @@ class SnackOutputHandler(ABC):
         pass
 
     @abstractmethod
-    def handle(self, snack_output_info, buffers, parameter_provider):
+    def handle(self, snack_output, buffers, parameter_provider):
         pass
 
 class AbstractSnackOutputHandler(SnackOutputHandler):
@@ -18,8 +18,8 @@ class AbstractSnackOutputHandler(SnackOutputHandler):
         return handler
 
     @abstractmethod
-    def handle(self, snack_output_info, buffers, parameter_provider):
+    def handle(self, snack_output, buffers, parameter_provider):
         if self._next_handler:
-            self._next_handler.handle(snack_output_info, buffers, parameter_provider)
+            self._next_handler.handle(snack_output, buffers, parameter_provider)
         else:
             return
