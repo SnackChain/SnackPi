@@ -13,7 +13,7 @@ class I2CProvider():
 	def write(self, snack_address, bytes):
 		if bytes:
 			self.i2c_bus.write_i2c_block_data(snack_address, 0, bytes)
-			time.sleep(0.4)
+			time.sleep(0.3)
 		else:
 			description = "Nothing to write to i2c bus, address: " + str(snack_address)
 			print(description)
