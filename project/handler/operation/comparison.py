@@ -18,7 +18,8 @@ class ComparisonHandler(AbstractOperationHandler):
 					operation_result = lhs >= rhs
 				elif comparison == '<=':
 					operation_result = lhs <= rhs
-				parameter_provider.store_result(operation_result)
+				in_operation_result = int(operation_result)
+				parameter_provider.store_result(in_operation_result)
 			else:
 				super().handle(operation, parameter_provider)
 		else:

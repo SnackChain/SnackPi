@@ -1,4 +1,3 @@
-from handler.operation.handler import OperationHandler
 from handler.operation.adittion import AdittionHandler
 from handler.operation.multiplication import MultiplicationHandler
 from handler.operation.split import SplitHandler
@@ -9,7 +8,7 @@ from handler.operation.truncate import TruncateHandler
 from handler.directive.handler import AbstractDirectiveHandler
 
 class OperationClient(AbstractDirectiveHandler):
-    handler: OperationHandler
+    handler = None
 
     def __init__(self):
         adittion_handler = AdittionHandler()
@@ -29,10 +28,10 @@ class OperationClient(AbstractDirectiveHandler):
 
         self.handler = adittion_handler
 
-    def handle(self, directive, parameter_provider, i2c_provider):
+    def handle(self, directive, parameter_provider, snack_manager):
         if directive.type == "operation":
             for operation in directive.data:
                 value = parameter_provider.get_values_from_dynamic(operation)
                 self.handler.handle(operation, parameter_provider)
         else:
-            super().handle(directive, parameter_provider, i2c_provider)
+            super().handle(directive, parameter_provider, snack_manager)

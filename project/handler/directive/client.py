@@ -2,11 +2,10 @@ from handler.type.client import InstructionClient
 from handler.snack.input.client import SnackInputClient
 from handler.snack.output.client import SnackOutputClient
 from handler.operation.client import OperationClient
-from handler.directive.handler import DirectiveHandler
 
 class DirectiveClient():
 
-    handler: DirectiveHandler
+    handler = None
 
     def __init__(self):
         snack_output = SnackOutputClient()
@@ -20,5 +19,5 @@ class DirectiveClient():
         
         self.handler = snack_output
 
-    def handle(self, directive, parameter_provider, i2c_provider):
-        self.handler.handle(directive, parameter_provider, i2c_provider)
+    def handle(self, directive, parameter_provider, snack_manager):
+        self.handler.handle(directive, parameter_provider, snack_manager)

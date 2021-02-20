@@ -12,6 +12,7 @@ class TimerHandler(AbstractEventTimeHandler):
 		if event_time.type == 'timer':
 			timer = Timer(**event_time.parameters)
 			method(*args)
-			schedule.every(timer.time_interval).seconds.do(method, *args).tag('all', 'timer')
+			#schedule.every(timer.time_interval).seconds.do(method, *args).tag('all', 'timer')
+			schedule.every(timer.time_interval).seconds.do(method, *args)
 		else:
-			super().handle(snack_device_id, snack, parameter_provider)
+			super().handle(event_time, method, *args)

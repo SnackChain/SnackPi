@@ -1,10 +1,9 @@
-from handler.time.handler import EventTimeHandler
 from handler.time.timer import TimerHandler
 import schedule
 
 class EventTimeClient():
 
-	handler: EventTimeHandler
+	handler = None
 
 	def __init__(self):
 		timer_handler = TimerHandler()
@@ -15,4 +14,5 @@ class EventTimeClient():
 
 	@staticmethod
 	def cancel_all():
+		return
 		schedule.clear('all')

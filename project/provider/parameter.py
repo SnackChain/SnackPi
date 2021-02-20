@@ -1,11 +1,16 @@
-class ParametersData:
+class ParametersData(object):
     result_key = 'r'
     values_key = 'v'
     sensor_key = 's'
 
     operatorsKeys = [result_key, values_key, sensor_key]
 
-    data = {result_key: {}, values_key: {}, sensor_key: {}}
+    def __init__(self):
+        self.data = {
+        self.result_key: {},
+        self.values_key: {},
+        self.sensor_key: {}
+        }
 
     def add(self, key, value):
         if key in self.operatorsKeys:
@@ -14,8 +19,10 @@ class ParametersData:
             self.data[key][parameterKey] = value
 
 # This replace dynamic values, such as v0, v1, v2, r0, r1, s1, s2... for the real values
-class ParameterProvider():
-    parameters = ParametersData()
+class ParameterProvider(object):
+
+    def __init__(self):
+        self.parameters = ParametersData()
 
     def get_values_from_dynamic(self, _operation):
         real_value = _operation

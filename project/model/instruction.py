@@ -1,10 +1,9 @@
-from __future__ import annotations
-
 ## Main structure for any snack instruction
 class SnackSetOfInstructions():
-	def __init__(self, event_time, directives):
+	def __init__(self, event_time, directives, require):
 		self.event_time = EventTime(**event_time)
 		self.directives = directives
+		self.require = Require(**require)
 
 class SnackDirective:
 	def __init__(self, type, data):
@@ -41,3 +40,7 @@ class SnackInputValue():
 	def __init__(self, static_value = None, dynamic_value = None):
 		self.static_value = static_value
 		self.dynamic_value = dynamic_value
+
+class Require():
+	def __init__(self, addresses):
+		self.addresses = addresses

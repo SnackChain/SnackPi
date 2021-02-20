@@ -1,5 +1,4 @@
 from handler.snack.input.handler import AbstractSnackInputHandler
-from provider.byte import ByteProvider
 from model.instruction import SnackInputValue
 
 class InputHandler(AbstractSnackInputHandler):
@@ -14,5 +13,4 @@ class InputHandler(AbstractSnackInputHandler):
 				value = parameter_provider.get_value_from_dynamic(snack_input_values.dynamic_value)
 				if value != None:
 					string_block = string_block + str(value)
-		byte_block = ByteProvider().from_string(string_block)
-		return byte_block
+		return string_block

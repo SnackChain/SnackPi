@@ -1,23 +1,10 @@
-from __future__ import annotations
-from abc import ABC, abstractmethod
+class AbstractDirectiveHandler:
+    _next_handler = None
 
-class DirectiveHandler(ABC):
-    @abstractmethod
-    def set_next(self, handler: Handler) -> Handler:
-        pass
-
-    @abstractmethod
-    def handle(self, directive, parameter_provider, i2c_provider):
-        pass
-
-class AbstractDirectiveHandler(DirectiveHandler):
-    _next_handler: OperationHandler = None
-
-    def set_next(self, handler: Handler) -> Handler:
+    def set_next(self, handler):
         self._next_handler = handler
         return handler
 
-    @abstractmethod
-    def handle(self, directive, parameter_provider, i2c_provider):
+    def handle(self, directive, parameter_provider, snack_manager):
         if self._next_handler:
-            self._next_handler.handle(directive, parameter_provider, i2c_provider)
+            self._next_handler.handle(directive, parameter_provider, snack_manager)

@@ -1,5 +1,4 @@
 from handler.snack.output.handler import AbstractSnackOutputHandler
-from provider.byte import ByteProvider
 
 class OutputHandler(AbstractSnackOutputHandler):
 
