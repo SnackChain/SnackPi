@@ -67,7 +67,7 @@ async def run_loop():
 		print("cycle")
 		snack_provider.run_pending()
 		schedule.run_pending()
-		await asyncio.sleep_ms(5_000)
+		await asyncio.sleep(5)
 
 event_loop = asyncio.get_event_loop()
 event_loop.create_task(run_webserver())
