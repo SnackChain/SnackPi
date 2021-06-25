@@ -1,4 +1,4 @@
-import ujson as json
+import json
 import schedule
 import time
 import provider.wlan as wlan
