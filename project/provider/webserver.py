@@ -1,4 +1,4 @@
-import urequests as requests
+import requests
 try:
     import tinyweb
 except ImportError:
