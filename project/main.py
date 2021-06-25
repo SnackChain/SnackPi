@@ -3,7 +3,7 @@ import schedule
 import time
 import provider.wlan as wlan
 import provider.webserver as webserver
-import uasyncio as asyncio
+import asyncio
 from handler.time.client import EventTimeClient
 from provider.parameter import ParameterProvider
 from provider.snackprovider import SnackProvider, AddressChecker
