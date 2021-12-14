@@ -8,7 +8,7 @@ except ImportError:
 app = Flask(__name__)
 api = Api(app)
 
-class RegisterSnack():
+class RegisterSnack(Resource):
 
     def __init__(self, snack_provider):
         self.snack_provider = snack_provider
@@ -23,8 +23,13 @@ class RegisterSnack():
         self.snack_provider.process(data)
         return "", 201
 
+class HelloWorld(Resource):
+    def get(self):
+        return {'hello': 'world'}
+
 def run(snack_provider):
-    api.add_resource(RegisterSnack(snack_provider), '/registersnack')
+    api.add_resource(HelloWorld, '/')
+    api.add_resource(RegisterSnack, '/registersnack', snack_provider)
     app.run(debug=True)
 
 # def send_instruction():
