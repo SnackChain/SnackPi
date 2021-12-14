@@ -1,8 +1,12 @@
 import requests
 try:
-    import tinyweb
+    from flask import Flask, request
+    from flask_restful import Resource, Api
 except ImportError:
     import mock.tinyweb as tinyweb
+
+app = Flask(__name__)
+api = Api(app)
 
 class RegisterSnack():
 
@@ -20,9 +24,8 @@ class RegisterSnack():
         return "", 201
 
 def run(snack_provider):
-    app = tinyweb.webserver()
     app.add_resource(RegisterSnack(snack_provider), '/registersnack')
-    app.run(host='192.168.4.1', port=80)
+    app.run(debug=True)
 
 # def send_instruction():
 # 	url = ip + "/instruction"
