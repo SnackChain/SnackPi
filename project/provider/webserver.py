@@ -24,7 +24,7 @@ class RegisterSnack():
         return "", 201
 
 def run(snack_provider):
-    app.add_resource(RegisterSnack(snack_provider), '/registersnack')
+    api.add_resource(RegisterSnack(snack_provider), '/registersnack')
     app.run(debug=True)
 
 # def send_instruction():
