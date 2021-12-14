@@ -10,8 +10,8 @@ api = Api(app)
 
 class RegisterSnack(Resource):
 
-    def __init__(self, snack_provider):
-        self.snack_provider = snack_provider
+    def __init__(self, **kwargs):
+        self.snack_provider = kwargs['provider']
 
     def get(self, data):
         """Return list of all customers"""
@@ -29,7 +29,7 @@ class HelloWorld(Resource):
 
 def run(snack_provider):
     api.add_resource(HelloWorld, '/')
-    api.add_resource(RegisterSnack, '/registersnack', snack_provider)
+    api.add_resource(RegisterSnack, '/registersnack', resource_class_kwargs={ 'provider': snack_provider })
     app.run(debug=True)
 
 # def send_instruction():
