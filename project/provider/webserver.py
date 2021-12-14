@@ -30,7 +30,7 @@ class HelloWorld(Resource):
 def run(snack_provider):
     api.add_resource(HelloWorld, '/')
     api.add_resource(RegisterSnack, '/registersnack', resource_class_kwargs={ 'provider': snack_provider })
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000)
 
 # def send_instruction():
 # 	url = ip + "/instruction"
