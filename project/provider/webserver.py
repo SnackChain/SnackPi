@@ -27,12 +27,12 @@ def registersnack(request):
     print(request.match_info)
     return web.Response(text="registered", status=200)
 
-def run(snack_provider):
+def runner(snack_provider):
     # api.add_resource(RegisterSnack, '/registersnack', resource_class_kwargs={ 'provider': snack_provider })
     # app.run(host="0.0.0.0", port=5000)
     app = web.Application()
     app.add_routes(routes)
-    web.run_app(app)
+    return web.AppRunner(app)
 
 # def send_instruction():
 # 	url = ip + "/instruction"

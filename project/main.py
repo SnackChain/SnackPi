@@ -71,9 +71,6 @@ wlan.connect_to_wifi()
 wlan.create_access_point()
 handle_instructions(snack_communicator, snack_provider)
 
-async def run_webserver():
-	webserver.run(snack_provider)
-
 async def run_loop():
 	while True:
 		print("cycle")
@@ -81,8 +78,9 @@ async def run_loop():
 		schedule.run_pending()
 		await asyncio.sleep(5)
 
+runner = webserver.runner(snack_provider)
 event_loop = asyncio.get_event_loop()
-event_loop.create_task(run_webserver())
+event_loop.create_task(runner.setup())
 event_loop.create_task(run_loop())
 
 event_loop.run_forever()
@@ -106,3 +104,19 @@ event_loop.run_forever()
 # start()
 # while True:
 # 	pass
+
+
+loop = asyncio.get_event_loop()
+# add stuff to the loop
+...
+
+# set up aiohttp - like run_app, but non-blocking
+runner = aiohttp.web.AppRunner(app)
+loop.run_until_complete(runner.setup())
+site = aiohttp.web.TCPSite(runner)    
+loop.run_until_complete(site.start())
+
+# add more stuff to the loop
+...
+
+loop.run_forever()
