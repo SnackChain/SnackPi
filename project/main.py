@@ -80,7 +80,7 @@ async def run_loop():
 
 runner = webserver.runner(snack_provider)
 event_loop = asyncio.get_event_loop()
-event_loop.create_task(runner.setup())
+event_loop.run_until_complete(runner.setup())
 event_loop.create_task(run_loop())
 
 event_loop.run_forever()
