@@ -78,7 +78,7 @@ async def run_loop():
 		schedule.run_pending()
 		await asyncio.sleep(5)
 
-runner = webserver.runner(snack_provider)
+runner, site = webserver.runner(snack_provider)
 event_loop = asyncio.get_event_loop()
 event_loop.run_until_complete(runner.setup())
 site = aiohttp.web.TCPSite(runner)    
