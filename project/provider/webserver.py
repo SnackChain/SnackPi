@@ -1,15 +1,8 @@
 import requests
-# try:
-# from flask import Flask, request
-# from flask_restful import Resource, Api
-import tinyweb
-# except ImportError:
-#     import mock.tinyweb as tinyweb
+from aiohttp import web
 
-# app = Flask(__name__)
-# api = Api(app)
-
-app = tinyweb.webserver()
+app = web.Application()
+routes = web.RouteTableDef()
 
 class RegisterSnack():
 
@@ -28,11 +21,18 @@ class RegisterSnack():
         self.snack_provider.process(data)
         return "", 201
 
+@routes.post('/registersnack')
+async def registersnack(request):
+    """Return list of all customers"""
+    print(request.match_info)
+    return web.Response(text="registered", status=200)
+
 def run(snack_provider):
     # api.add_resource(RegisterSnack, '/registersnack', resource_class_kwargs={ 'provider': snack_provider })
     # app.run(host="0.0.0.0", port=5000)
-    app.add_resource(RegisterSnack(snack_provider), '/registersnack')
-    app.run()
+    app = web.Application()
+    app.add_routes(routes)
+    web.run_app(app)
 
 # def send_instruction():
 # 	url = ip + "/instruction"
