@@ -10,7 +10,7 @@ class EventTimeClient():
 		self.handler = timer_handler
 
 	def handle(self, event_time, method, *args):
-		self.handler.handle(event_time, method, *args)
+		return self.handler.handle(event_time, method, *args)
 
 	@staticmethod
 	def cancel_all():

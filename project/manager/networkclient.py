@@ -1,11 +1,12 @@
-try:
-	import urequests as requests
-    #from urequests.adapters import HTTPAdapter
-    #from urequests.exceptions import ConnectionError
-except ImportError:
-    import requests
-    #from requests.adapters import HTTPAdapter
-    #from requests.exceptions import ConnectionError
+# try:
+# import urequests as requests
+#from urequests.adapters import HTTPAdapter
+#from urequests.exceptions import ConnectionError
+# except ImportError:
+import requests
+from singletonmeta import SingletonMeta 
+#from requests.adapters import HTTPAdapter
+#from requests.exceptions import ConnectionError
 
 class HTTPRequest():
 	def __init__(self, url, method, headers = None, parameters = None, parameter_encoding = 'json'):
@@ -74,7 +75,7 @@ class SessionLoader():
 				)
 			return response
 
-class NetworkClient:
+class NetworkClient(metaclass=SingletonMeta):
 
 	http_loader = NetworkLoader()
 

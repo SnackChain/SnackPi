@@ -10,18 +10,18 @@ class AddressChecker():
 	FIRED = 'F'
 	READY = 'R'
 
-	require_addresses = None
+	required_addresses = None
 	start_closure = None
 	status = PENDING
 
-	def __init__(self, require_addresses, start_closure):
-		self.require_addresses = require_addresses
+	def __init__(self, required_addresses, start_closure):
+		self.required_addresses = required_addresses
 		self.start_closure = start_closure
 
 	def check(self, available_snacks):
 		if self.status == self.FIRED:
 			return
-		for address in self.require_addresses:
+		for address in self.required_addresses:
 			if address not in available_snacks:
 				return
 		self.status = self.READY
@@ -44,16 +44,7 @@ class AddressChecker():
 class SnackProvider():
 
 	address_checkers = []
-
-	try:
-		import sys
-		board = sys.platform
-		if board == "esp8266" or board == "esp32":
-			snacks = {}
-		else:
-			snacks = {"5C:CF:7F:36:E3:33": SnackInfo("192.168.4.2", "62DFBD97-9E7A-422F-8EBA-B15970F9D173", "5C:CF:7F:36:E3:33", "https://raw.githubusercontent.com/SnackChain/SnackChainDefinitions/master/spec.json")}
-	except:
-			snacks = {"5C:CF:7F:36:E3:33": SnackInfo("192.168.4.2", "62DFBD97-9E7A-422F-8EBA-B15970F9D173", "5C:CF:7F:36:E3:33", "https://raw.githubusercontent.com/SnackChain/SnackChainDefinitions/master/spec.json")}
+	snacks = {}
 
 	def addChecker(self, address_checker):
 		self.address_checkers.append(address_checker)

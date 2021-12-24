@@ -8,11 +8,20 @@ class Timer():
 
 class TimerHandler(AbstractEventTimeHandler):
 
+	job = None
+
 	def handle(self, event_time, method, *args):
 		if event_time.type == 'timer':
 			timer = Timer(**event_time.parameters)
 			method(*args)
 			#schedule.every(timer.time_interval).seconds.do(method, *args).tag('all', 'timer')
-			schedule.every(timer.time_interval).seconds.do(method, *args)
+			self.job = schedule.every(timer.time_interval).seconds.do(method, *args)
+			return cancel()
 		else:
-			super().handle(event_time, method, *args)
+			return super().handle(event_time, method, *args)
+
+	def cancel():
+		def start():
+			if job != None:
+				schedule.cancel_job(job)
+		return start
