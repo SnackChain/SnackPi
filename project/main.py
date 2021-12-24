@@ -71,7 +71,7 @@ wlan.connect_to_wifi()
 wlan.create_access_point()
 handle_instructions(snack_communicator, snack_provider)
 
-async def run_webserver():
+def run_webserver():
 	webserver.run(snack_provider)
 
 async def run_loop():
