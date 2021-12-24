@@ -31,8 +31,11 @@ def runner(snack_provider):
     # api.add_resource(RegisterSnack, '/registersnack', resource_class_kwargs={ 'provider': snack_provider })
     # app.run(host="0.0.0.0", port=5000)
     app.add_routes(routes)
-    runner = web.AppRunner(app)
-    return runner, web.TCPSite(runner)
+    return web.AppRunner(app)
+
+def site(runner):
+    site = web.TCPSite(runner)   
+    return site
 
 # def send_instruction():
 # 	url = ip + "/instruction"
