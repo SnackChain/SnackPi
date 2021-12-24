@@ -22,7 +22,7 @@ class RegisterSnack():
         return "", 201
 
 @routes.post('/registersnack')
-async def registersnack(request):
+def registersnack(request):
     """Return list of all customers"""
     print(request.match_info)
     return web.Response(text="registered", status=200)
