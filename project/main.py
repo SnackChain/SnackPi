@@ -81,6 +81,8 @@ async def run_loop():
 runner = webserver.runner(snack_provider)
 event_loop = asyncio.get_event_loop()
 event_loop.run_until_complete(runner.setup())
+site = aiohttp.web.TCPSite(runner)    
+event_loop.run_until_complete(site.start())
 event_loop.create_task(run_loop())
 
 event_loop.run_forever()
