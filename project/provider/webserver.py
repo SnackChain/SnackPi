@@ -1,17 +1,22 @@
 import requests
 # try:
-from flask import Flask, request
-from flask_restful import Resource, Api
+# from flask import Flask, request
+# from flask_restful import Resource, Api
+import tinyweb
 # except ImportError:
 #     import mock.tinyweb as tinyweb
 
-app = Flask(__name__)
-api = Api(app)
+# app = Flask(__name__)
+# api = Api(app)
 
-class RegisterSnack(Resource):
+app = tinyweb.webserver()
 
-    def __init__(self, **kwargs):
-        self.snack_provider = kwargs['provider']
+class RegisterSnack():
+
+    # def __init__(self, **kwargs):
+        # self.snack_provider = kwargs['provider']
+    def __init__(self, snack_provider):
+        self.snack_provider = snack_provider
 
     def get(self, data):
         """Return list of all customers"""
@@ -24,8 +29,10 @@ class RegisterSnack(Resource):
         return "", 201
 
 def run(snack_provider):
-    api.add_resource(RegisterSnack, '/registersnack', resource_class_kwargs={ 'provider': snack_provider })
-    app.run(host="0.0.0.0", port=5000)
+    # api.add_resource(RegisterSnack, '/registersnack', resource_class_kwargs={ 'provider': snack_provider })
+    # app.run(host="0.0.0.0", port=5000)
+    app.add_resource(RegisterSnack(snack_provider), '/registersnack')
+    app.run()
 
 # def send_instruction():
 # 	url = ip + "/instruction"
