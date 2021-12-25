@@ -16,7 +16,7 @@ class WebServer():
         return web.Response(text="registered", status=200)
 
     def runner(self):
-        self.app.add_routes(routes)
+        self.app.add_routes(self.routes)
         return web.AppRunner(self.app)
 
     def site(self, runner):
