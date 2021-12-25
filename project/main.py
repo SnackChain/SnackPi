@@ -2,7 +2,7 @@ import json
 import schedule
 import time
 import provider.wlan as wlan
-from provider.webserver import WebServer
+import provider.webserver as webserver
 import asyncio
 from handler.time.client import EventTimeClient
 from provider.parameter import ParameterProvider
@@ -18,7 +18,6 @@ instruction_mock_1 = open('instruction_mock_1.json')
 snack_json = json.load(instruction_mock_1)
 instructions_jsons = [snack_json]
 snack_provider = SnackProvider()
-webserver = WebServer(snack_provider)
 snack_communicator = SnackCommunicatior(snack_provider)
 
 
@@ -80,7 +79,7 @@ async def run_loop():
 		await asyncio.sleep(5)
 
 event_loop = asyncio.get_event_loop()
-runner = webserver.runner()
+runner = webserver.runner(snack_provider)
 event_loop.run_until_complete(runner.setup())
 site = webserver.site(runner)    
 event_loop.run_until_complete(site.start())

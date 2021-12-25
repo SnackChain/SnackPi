@@ -1,28 +1,22 @@
 import requests
 from aiohttp import web
 
-class WebServer():
+app = web.Application()
 
-    app = web.Application()
-    routes = web.RouteTableDef()
-    snack_provider = None
+class RegisterSnack(web.View):
 
-    def __init__(self, snack_provider):
-        self.snack_provider = snack_provider
-
-    @routes.post('/registersnack')
-    async def registersnack(self, request):
-        await self.snack_provider.process(request.json())
+    async def post(self):
+        print(self.request.json())
+        self.snack_provider.process(self.request.json())
         return web.Response(text="registered", status=200)
 
-    def runner(self):
-        self.app.add_routes(self.routes)
-        return web.AppRunner(self.app)
+def runner(snack_provider):
+    app.add_route("/registersnack", RegisterSnack, snack_provider)
+    return web.AppRunner(app)
 
-    def site(self, runner):
-        site = web.TCPSite(runner, host="snackbase.local")   
-        return site
-
+def site(runner):
+    site = web.TCPSite(runner, host="snackbase.local")   
+    return site
 
 # def send_instruction():
 # 	url = ip + "/instruction"
