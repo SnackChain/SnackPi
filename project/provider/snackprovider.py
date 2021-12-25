@@ -51,6 +51,7 @@ class SnackProvider():
 
 	def process(self, data):
 		snack_info = SnackInfo(data.get("ip"), data.get("id"), data.get("mac"), data.get("spec"))
+		print(snack_info)
 		self.register_snack(snack_info)
 
 	def register_snack(self, snack_info):
