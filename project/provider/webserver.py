@@ -15,11 +15,11 @@ class WebServer():
         await self.snack_provider.process(request.json())
         return web.Response(text="registered", status=200)
 
-    def runner():
+    def runner(self):
         app.add_routes(routes)
         return web.AppRunner(app)
 
-    def site(runner):
+    def site(self, runner):
         site = web.TCPSite(runner, host="snackbase.local")   
         return site
 
