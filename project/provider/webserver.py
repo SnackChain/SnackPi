@@ -11,7 +11,7 @@ class RegisterSnack(web.View):
         return web.Response(text="registered", status=200)
 
 def runner(snack_provider):
-    app.add_route("/registersnack", RegisterSnack, snack_provider)
+    app.router.add_route("/registersnack", RegisterSnack, snack_provider)
     return web.AppRunner(app)
 
 def site(runner):
