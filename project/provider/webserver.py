@@ -20,7 +20,7 @@ def runner(snack_provider):
     return web.AppRunner(app)
 
 def site(runner):
-    site = web.TCPSite(runner, host="snackbase.local")   
+    site = web.TCPSite(runner, host="snackbase.local", port=5000)   
     return site
 
 # def send_instruction():
