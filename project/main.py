@@ -2,7 +2,7 @@ import json
 import schedule
 import time
 import provider.wlan as wlan
-import provider.webserver as webserver
+from provider.webserver import WebServer
 import asyncio
 from handler.time.client import EventTimeClient
 from provider.parameter import ParameterProvider
@@ -18,6 +18,7 @@ instruction_mock_1 = open('instruction_mock_1.json')
 snack_json = json.load(instruction_mock_1)
 instructions_jsons = [snack_json]
 snack_provider = SnackProvider()
+webserver = WebServer(snack_provider)
 snack_communicator = SnackCommunicatior(snack_provider)
 
 
@@ -79,46 +80,11 @@ async def run_loop():
 		await asyncio.sleep(5)
 
 event_loop = asyncio.get_event_loop()
-runner = webserver.runner(snack_provider)
+runner = webserver.runner()
 event_loop.run_until_complete(runner.setup())
 site = webserver.site(runner)    
 event_loop.run_until_complete(site.start())
-event_loop.create_task(run_loop())
+# event_loop.create_task(run_loop())
 
 event_loop.run_forever()
-# times = 0
 
-
-# import network
-# def start(quiet=False):
-# 	network.WLAN(network.AP_IF).active(False)
-# 	wlan = network.WLAN(network.STA_IF)
-# 	wlan.active(True)
-# 	if not wlan.isconnected():
-# 		if not quiet: print('connecting to network...')
-# 		wlan.connect('GV 2.4', '311153978')
-# 		while not wlan.isconnected():
-# 			pass
-# 		wlan.config(dhcp_hostname="SnackBase")
-# 	if not quiet: print('network config:', wlan.ifconfig())
-# 	return(wlan)
-
-# start()
-# while True:
-# 	pass
-
-
-loop = asyncio.get_event_loop()
-# add stuff to the loop
-...
-
-# set up aiohttp - like run_app, but non-blocking
-runner = aiohttp.web.AppRunner(app)
-loop.run_until_complete(runner.setup())
-site = aiohttp.web.TCPSite(runner)    
-loop.run_until_complete(site.start())
-
-# add more stuff to the loop
-...
-
-loop.run_forever()
