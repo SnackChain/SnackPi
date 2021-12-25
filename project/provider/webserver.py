@@ -9,9 +9,9 @@ class RegisterSnack(web.View):
         self.snack_provider = snack_provider
 
     async def __call__(self, request):
-        print("Registering device")
-        data = await request.post()
-        self.snack_provider.process(data)
+        json = await request.json()
+        print(json)
+        self.snack_provider.process(json)
         return web.Response(text="registered", status=200)
 
 def runner(snack_provider):

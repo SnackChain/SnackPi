@@ -49,9 +49,8 @@ class SnackProvider():
 	def addChecker(self, address_checker):
 		self.address_checkers.append(address_checker)
 
-	def process(self, data):
-		snack_info = SnackInfo(data.get("ip"), data.get("id"), data.get("mac"), data.get("spec"))
-		print(snack_info.ip)
+	def process(self, json):
+		snack_info = SnackInfo(**json)
 		self.register_snack(snack_info)
 
 	def register_snack(self, snack_info):
