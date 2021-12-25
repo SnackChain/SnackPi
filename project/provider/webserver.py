@@ -5,13 +5,16 @@ app = web.Application()
 
 class RegisterSnack(web.View):
 
-    async def post(self):
+    def __init__(self, snack_provider):
+        self.snack_provider = snack_provider
+
+    async def __call__(self):
         data = await self.request.post()
         self.snack_provider.process(data)
         return web.Response(text="registered", status=200)
 
 def runner(snack_provider):
-    app.router.add_route("/registersnack", RegisterSnack, snack_provider)
+    app.router.add_route("POST", "/registersnack", RegisterSnack(snack_provider))
     return web.AppRunner(app)
 
 def site(runner):
