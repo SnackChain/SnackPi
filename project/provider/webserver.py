@@ -16,8 +16,8 @@ class WebServer():
         return web.Response(text="registered", status=200)
 
     def runner(self):
-        app.add_routes(routes)
-        return web.AppRunner(app)
+        self.app.add_routes(routes)
+        return web.AppRunner(self.app)
 
     def site(self, runner):
         site = web.TCPSite(runner, host="snackbase.local")   
