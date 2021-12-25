@@ -11,7 +11,7 @@ class WebServer():
         self.snack_provider = snack_provider
 
     @routes.post('/registersnack')
-    async def registersnack(request):
+    async def registersnack(self, request):
         await self.snack_provider.process(request.json())
         return web.Response(text="registered", status=200)
 
