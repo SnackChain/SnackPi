@@ -8,8 +8,8 @@ class RegisterSnack(web.View):
     def __init__(self, snack_provider):
         self.snack_provider = snack_provider
 
-    async def __call__(self):
-        data = await self.request.post()
+    async def __call__(self, request):
+        data = await request.post()
         self.snack_provider.process(data)
         return web.Response(text="registered", status=200)
 
