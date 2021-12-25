@@ -13,7 +13,7 @@ class RegisterSnack(web.View):
         print("Registering device:")
         print(json)
         self.snack_provider.process(json)
-        return web.Response(text="registered", status=200)
+        return web.Response(text="registered", status=201)
 
 def runner(snack_provider):
     app.router.add_route("POST", "/registersnack", RegisterSnack(snack_provider))
