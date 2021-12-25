@@ -6,8 +6,8 @@ app = web.Application()
 class RegisterSnack(web.View):
 
     async def post(self):
-        print(self.request.json())
-        self.snack_provider.process(self.request.json())
+        data = await self.request.post()
+        self.snack_provider.process(data)
         return web.Response(text="registered", status=200)
 
 def runner(snack_provider):
