@@ -20,18 +20,21 @@ instructions_jsons = [snack_json]
 snack_provider = SnackProvider()
 snack_communicator = SnackCommunicatior(snack_provider)
 
-
 class SnackInstructionHandler():
 	snack_set_of_instructions = None
 	address_checker = None
 	snack_communicator = None
 	cancellable = None
 
-	def __init__(self, snack_set_of_instructions, snack_communicator):
+	# init -> start_snack -> handle_time -> handle_directive ->? cancel
+	def __init__(self, snack_set_of_instructions, snack_communicator, snack_provider):
 		self.snack_set_of_instructions = snack_set_of_instructions
 		self.snack_communicator = snack_communicator
-		self.address_checker = AddressChecker(snack_set_of_instructions.require.addresses, self.start_snack())
-		# snack_provider.addChecker(addressChecker)
+		require_addresses = snack_set_of_instructions.require.addresses
+		print("Requiered addresses:")
+		print(require_addresses)
+		self.address_checker = AddressChecker(require_addresses, self.start_snack())
+		snack_provider.addChecker(address_checker)
 
 	def start_snack(self):
 		def start():
@@ -65,7 +68,7 @@ def handle_instructions(snack_communicator, snack_provider):
 
 def handle_instruction(snack_instruction_dictionary, snack_communicator, snack_provider):
 	snack_set_of_instructions = SnackSetOfInstructions(**snack_instruction_dictionary)
-	SnackInstructionHandler(snack_set_of_instructions, snack_communicator)
+	SnackInstructionHandler(snack_set_of_instructions, snack_communicator, snack_provider)
 
 wlan.connect_to_wifi()
 wlan.create_access_point()
@@ -74,6 +77,7 @@ handle_instructions(snack_communicator, snack_provider)
 async def run_loop():
 	while True:
 		print("cycle")
+		# snack_provider.run_pending -> address_checker.start_closure() (start_snack from SnackInstructionHandler)
 		snack_provider.run_pending()
 		schedule.run_pending()
 		await asyncio.sleep(5)
@@ -83,7 +87,7 @@ runner = webserver.runner(snack_provider)
 event_loop.run_until_complete(runner.setup())
 site = webserver.site(runner)    
 event_loop.run_until_complete(site.start())
-# event_loop.create_task(run_loop())
+event_loop.create_task(run_loop())
 
 event_loop.run_forever()
 

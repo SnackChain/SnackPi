@@ -5,6 +5,8 @@ class SnackInfo():
 		self.mac = mac
 		self.spec = spec
 
+# This class contains the necessary Snacks addresses for 1 set of instructions
+# Once all addresses are available, it can fire
 class AddressChecker():
 	PENDING = 'P'
 	FIRED = 'F'
