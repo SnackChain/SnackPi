@@ -43,12 +43,12 @@ class SnackInstructionHandler():
 			self.handle_time(self.snack_set_of_instructions)
 		return start
 
-	def handle_time(snack_set_of_instructions):
+	def handle_time(self, snack_set_of_instructions):
 		event_time_client = EventTimeClient()
 		self.cancellable = event_time_client.handle(self.snack_set_of_instructions.event_time, handle_directive)
 
 	# This is called within the EventTimeClient every time the event conditions are met.
-	def handle_directive():
+	def handle_directive(self):
 		print("Directive started")
 		directive_client = DirectiveClient()
 		parameter_provider = ParameterProvider()
