@@ -40,7 +40,7 @@ class SnackInstructionHandler():
 		def start():
 			print("Start called")
 			#It stores and provide all the dynamic parameters
-			handle_time(self.snack_set_of_instructions)
+			self.handle_time(self.snack_set_of_instructions)
 		return start
 
 	def handle_time(snack_set_of_instructions):
