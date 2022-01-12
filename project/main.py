@@ -45,7 +45,7 @@ class SnackInstructionHandler():
 
 	def handle_time(self, snack_set_of_instructions):
 		event_time_client = EventTimeClient()
-		self.cancellable = event_time_client.handle(self.snack_set_of_instructions.event_time, handle_directive)
+		self.cancellable = event_time_client.handle(self.snack_set_of_instructions.event_time, self.handle_directive)
 
 	# This is called within the EventTimeClient every time the event conditions are met.
 	def handle_directive(self):
