@@ -34,7 +34,7 @@ class SnackInstructionHandler():
 		print("Requiered addresses:")
 		print(require_addresses)
 		self.address_checker = AddressChecker(require_addresses, self.start_snack())
-		snack_provider.addChecker(address_checker)
+		snack_provider.addChecker(self.address_checker)
 
 	def start_snack(self):
 		def start():
