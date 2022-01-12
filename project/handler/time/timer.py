@@ -20,7 +20,7 @@ class TimerHandler(AbstractEventTimeHandler):
 		else:
 			return super().handle(event_time, method, *args)
 
-	def cancel():
+	def cancel(self):
 		def start():
 			if job != None:
 				schedule.cancel_job(job)
