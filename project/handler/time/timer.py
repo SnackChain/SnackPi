@@ -16,7 +16,7 @@ class TimerHandler(AbstractEventTimeHandler):
 			method(*args)
 			#schedule.every(timer.time_interval).seconds.do(method, *args).tag('all', 'timer')
 			self.job = schedule.every(timer.time_interval).seconds.do(method, *args)
-			return cancel()
+			return self.cancel()
 		else:
 			return super().handle(event_time, method, *args)
 
