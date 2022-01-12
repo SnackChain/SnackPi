@@ -16,7 +16,7 @@
          "data":{
             "type":"request",
             "payload":{
-               "url":"https://api.bitso.com/v3/ticker/?book=xrp_mxn",
+               "url":"https://api.bitso.com/v3/ticker/?book=eth_mxn",
                "headers":null,
                "parameters":null,
                "method":"GET",
@@ -54,8 +54,8 @@
             ],
             [
                "v1",
-               ">",
-               850000
+               "<",
+               62000
             ]
          ]
       },
