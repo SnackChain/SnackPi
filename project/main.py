@@ -29,20 +29,18 @@ wlan.connect_to_wifi()
 # wlan.create_access_point()
 handle_instructions(snack_communicator, snack_provider)
 
-# async def run_loop():
-# 	while True:
-# 		print("cycle")
-# 		# snack_provider.run_pending -> address_checker.start_closure() (fire_instruction from SnackInstructionManager)
-# 		# snack_provider.run_pending()
-# 		# schedule.run_pending()
-# 		await asyncio.sleep(5)
+async def run_loop():
+	while True:
+		print("schedule.run_pending")
+		schedule.run_pending()
+		await asyncio.sleep(1)
 
 event_loop = asyncio.get_event_loop()
 runner = webserver.runner(snack_provider)
 event_loop.run_until_complete(runner.setup())
 site = webserver.site(runner)    
 event_loop.run_until_complete(site.start())
-# event_loop.create_task(run_loop())
+event_loop.create_task(run_loop())
 
 event_loop.run_forever()
 
