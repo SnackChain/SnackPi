@@ -21,7 +21,7 @@ class SnackProvider():
 		self.instructions.append(instruction)
 
 	# def check_address(self):
-	def set_ready_status_if_requirements_met(self)
+	def set_ready_status_if_requirements_met(self):
 		available_snacks = self.snacks.keys()
 		for instruction in self.instructions:
 			instruction.set_ready_status_if_requirements_met(available_snacks)
