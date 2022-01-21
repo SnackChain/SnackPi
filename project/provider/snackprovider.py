@@ -1,3 +1,4 @@
+import schedule
 from model.snackinfo import SnackInfo
 
 class SnackProvider():
@@ -29,3 +30,4 @@ class SnackProvider():
 	def run_pending(self):
 		for instruction in self.instructions:
 			instruction.fire_instruction_if_ready()
+		schedule.run_pending()
