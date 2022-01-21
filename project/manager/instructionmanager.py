@@ -23,7 +23,7 @@ class InstructionManager():
 		if self.instruction_status_manager.is_ready_to_fire():
 			self.instruction_status_manager.set_fired_status()
 			print("Fire")
-			self.fire_instruction()
+			self.handle_time()
 
 	def fire_instruction(self):
 		def start():
