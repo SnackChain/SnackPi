@@ -22,6 +22,7 @@ class InstructionManager():
 	def fire_instruction_if_ready(self):
 		if self.instruction_status_manager.is_ready_to_fire():
 			self.instruction_status_manager.set_fired_status()
+			print("Fire")
 			self.fire_instruction()
 
 	def fire_instruction(self):
