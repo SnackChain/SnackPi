@@ -19,7 +19,7 @@ class InstructionManager():
 	def set_ready_status_if_requirements_met(self, available_snacks):
 		self.instruction_status_manager.set_ready_status_if_requirements_met(available_snacks)
 
-	def fire_instruction_if_ready():
+	def fire_instruction_if_ready(self):
 		if self.instruction_status_manager.is_ready_to_fire():
 			self.instruction_status_manager.set_fired_status()
 			self.fire_instruction()
