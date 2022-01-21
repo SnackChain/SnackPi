@@ -22,8 +22,8 @@ def handle_instructions(snack_communicator, snack_provider):
 
 def handle_instruction(snack_instruction_dictionary, snack_communicator, snack_provider):
 	snack_set_of_instructions = SnackSetOfInstructions(**snack_instruction_dictionary)
-	snack_instruction_handler = InstructionManager(snack_set_of_instructions, snack_communicator)
-	snack_provider.addChecker(snack_instruction_handler.address_checker())
+	snack_instruction_manager= InstructionManager(snack_set_of_instructions, snack_communicator)
+	snack_provider.add_instruction(snack_instruction_manager)
 
 wlan.connect_to_wifi()
 # wlan.create_access_point()
