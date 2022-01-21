@@ -26,15 +26,18 @@ class InstructionManager():
 
 	def fire_instruction(self):
 		def start():
+			print("Start")
 			self.handle_time()
 		return start
 
 	def handle_time(self):
+		print("Handle time")
 		event_time_client = EventTimeClient()
 		self.cancellable = event_time_client.handle(self.snack_set_of_instructions.event_time, self.handle_directive)
 
 	# This is called within the EventTimeClient every time the event conditions are met.
 	def handle_directive(self):
+		print("Handle directive")
 		directive_client = DirectiveClient()
 		parameter_provider = ParameterProvider()
 		for directive_data in self.snack_set_of_instructions.directives:
