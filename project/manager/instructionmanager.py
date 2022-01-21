@@ -16,8 +16,8 @@ class InstructionManager():
 		self.snack_communicator = snack_communicator
 		self.instruction_status_manager = InstructionStatusManager(self.snack_set_of_instructions.require)
 
-	def set_ready_status_if_all_addresses_available(self, available_snacks):
-		self.instruction_status_manager.set_ready_status_if_all_addresses_available(available_snacks)
+	def set_ready_status_if_requirements_met(self, available_snacks):
+		self.instruction_status_manager.set_ready_status_if_requirements_met(available_snacks)
 
 	def fire_instruction_if_ready():
 		if self.instruction_status_manager.is_ready_to_fire():
