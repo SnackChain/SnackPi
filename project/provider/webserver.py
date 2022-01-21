@@ -12,7 +12,7 @@ class RegisterSnack(web.View):
         json = await request.json()
         print("Registering device:")
         print(json)
-        self.snack_provider.process(json)
+        self.snack_provider.register_snack_from_json(json)
         return web.Response(text="registered", status=201)
 
 def runner(snack_provider):
