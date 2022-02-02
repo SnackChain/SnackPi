@@ -10,11 +10,6 @@ from manager.singleinstructionhandler import SingleInstructionHandler
 from model.instruction import Instruction
 from manager.snackcommunicatior import SnackCommunicatior
 
-snack_provider = SnackProvider()
-snack_communicator = SnackCommunicatior(snack_provider)
-instruction_provider = InstructionProvider(snack_communicator)
-instructions_handler = InstructionsHandler(instruction_provider) 
-
 class InstructionProvider():
 
 	handlers = {}
@@ -64,6 +59,10 @@ class InstructionsHandler():
 		self.instruction_provider.update_instructions_from_json(json)
 		self.run_pending(available_snacks)
 
+snack_provider = SnackProvider()
+snack_communicator = SnackCommunicatior(snack_provider)
+instruction_provider = InstructionProvider(snack_communicator)
+instructions_handler = InstructionsHandler(instruction_provider) 
 
 wlan.connect_to_wifi()
 # wlan.create_access_point()
