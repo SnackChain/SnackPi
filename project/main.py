@@ -31,7 +31,7 @@ class InstructionProvider():
 	def update_instructions_handlers(self, instructions_jsons):
 		for instruction_json in instructions_jsons:
 			instruction_id, single_instruction_handler = self.create_instruction_handler(instruction_json)
-			if instruction_id in handlers:
+			if instruction_id in self.handlers:
 				self.handlers[instruction_id].cancel()
 			self.handlers[instruction_id] = single_instruction_handler
 
