@@ -34,6 +34,7 @@ class InstructionProvider():
 			if instruction_id in self.handlers:
 				self.handlers[instruction_id].cancel()
 			self.handlers[instruction_id] = single_instruction_handler
+		print(self.handlers)
 
 	def create_instruction_handler(self, instruction_json):
 		instruction = Instruction(**instruction_json)
