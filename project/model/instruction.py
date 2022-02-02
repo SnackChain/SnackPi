@@ -3,6 +3,7 @@ class Instruction():
 	def __init__(self, id, event_time, directives, require):
 		self.id = id
 		self.event_time = EventTime(**event_time)
+		self.directives = []
 		for directive in directives:
 			self.directives.append(Directive(**directives))
 		self.require = Require(**require)
