@@ -5,14 +5,15 @@ app = web.Application()
 
 class RegisterSnack(web.View):
 
-    def __init__(self, snack_provider):
+    def __init__(self, instructions_handler, snack_provider):
+        self.instructions_handler = instructions_handler
         self.snack_provider = snack_provider
 
     async def __call__(self, request):
         json = await request.json()
         print("Registering device:")
         print(json)
-        self.snack_provider.register_snack_from_json(json)
+        self.snack_provider.register_snack_from_json(json, self.instructions_handler)
         return web.Response(text="registered", status=201)
 
 class UpdateInstructions(web.View):
@@ -29,7 +30,7 @@ class UpdateInstructions(web.View):
         return web.Response(text="registered", status=201)
 
 def runner(snack_provider, instructions_handler):
-    app.router.add_route("POST", "/registersnack", RegisterSnack(snack_provider))
+    app.router.add_route("POST", "/registersnack", RegisterSnack(instructions_handler, snack_provider))
     app.router.add_route("POST", "/updateinstructions", UpdateInstructions(instructions_handler, snack_provider))
     return web.AppRunner(app)
 

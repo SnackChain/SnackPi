@@ -4,9 +4,9 @@ class SnackProvider():
 
 	snacks = {}
 
-	def register_snack_from_json(self, json):
+	def register_snack_from_json(self, json, instructions_handler):
 		snack_info = SnackInfo(**json)
-		self.register_snack(snack_info)
+		self.register_snack(snack_info, instructions_handler)
 
 	def register_snack(self, snack_info, instructions_handler):
 		self.snacks[snack_info.mac] = snack_info
