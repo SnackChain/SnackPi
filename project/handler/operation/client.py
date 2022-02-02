@@ -1,4 +1,4 @@
-from handler.operation.adittion import AdditionHandler
+from handler.operation.addition import AdditionHandler
 from handler.operation.multiplication import MultiplicationHandler
 from handler.operation.split import SplitHandler
 from handler.operation.subtraction import SubtractionHandler
