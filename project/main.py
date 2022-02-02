@@ -67,8 +67,6 @@ class InstructionsHandler():
 
 wlan.connect_to_wifi()
 # wlan.create_access_point()
-instructions_handler.
-handle_instructions(snack_communicator, snack_provider)
 
 async def run_loop():
 	while True:
