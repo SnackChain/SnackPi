@@ -5,7 +5,7 @@ class Instruction():
 		self.event_time = EventTime(**event_time)
 		self.directives = []
 		for directive in directives:
-			self.directives.append(Directive(**directives))
+			self.directives.append(Directive(**directive))
 		self.require = Require(**require)
 
 class Directive:
