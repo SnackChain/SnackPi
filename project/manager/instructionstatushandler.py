@@ -13,7 +13,7 @@ class InstructionStatus():
 	def is_fired(self):
 		return self.current == self.FIRED
 
-	def is_fired(self):
+	def is_ready(self):
 		return self.current == self.READY
 
 class InstructionStatusHandler():
