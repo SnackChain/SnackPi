@@ -17,7 +17,7 @@ class RegisterSnack(web.View):
 
 class UpdateInstructions(web.View):
 
-    def __init__(self, instructions_handler, snack_provider)
+    def __init__(self, instructions_handler, snack_provider):
         self.instructions_handler = instructions_handler
         self.snack_provider = snack_provider
 
@@ -25,7 +25,7 @@ class UpdateInstructions(web.View):
         json = await request.json()
         print("Update instructions:")
         print(json)
-        self.instructions_handler.update_instructions_from_json(json, snack_provider.available_snacks())
+        self.instructions_handler.update_instructions_from_json(json, self.snack_provider.available_snacks())
         return web.Response(text="registered", status=201)
 
 def runner(snack_provider, instructions_handler):
