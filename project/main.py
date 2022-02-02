@@ -6,7 +6,7 @@ import provider.webserver as webserver
 import asyncio
 
 from provider.snackprovider import SnackProvider
-from manager.instructionmanager import SingleInstructionHandler
+from manager.singleinstructionhandler import SingleInstructionHandler
 from model.instruction import Instruction
 from manager.snackcommunicatior import SnackCommunicatior
 
