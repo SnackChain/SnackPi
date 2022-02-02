@@ -51,8 +51,7 @@ class InstructionsHandler():
 		self.instruction_provider = instruction_provider
 
 	def run_pending(self, available_snacks):
-		print(self.instruction_provider.handlers)
-		for key, single_instruction_handler in self.instruction_provider.handlers:
+		for _, single_instruction_handler in self.instruction_provider.handlers.iteritems():
 			single_instruction_handler.set_ready_status_if_requirements_met(available_snacks)
 			single_instruction_handler.fire_instruction_if_ready()
 
