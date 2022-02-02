@@ -5,7 +5,7 @@ from provider.parameter import ParameterProvider
 from model.instruction import Directive
 
 class SingleInstructionHandler():
-	instruction_status_manager = None
+	instruction_status_handler = None
 	snack_instruction_data = None
 	snack_communicator = None
 	cancellables = None
@@ -14,13 +14,15 @@ class SingleInstructionHandler():
 	def __init__(self, snack_instruction_data, snack_communicator):
 		self.snack_instruction_data = snack_instruction_data
 		self.snack_communicator = snack_communicator
-		self.instruction_status_manager = InstructionStatusHandler(self.snack_instruction_data.require)
+		self.instruction_status_handler = InstructionStatusHandler(self.snack_instruction_data.require)
 
 	def set_ready_status_if_requirements_met(self, available_snacks):
-		self.instruction_status_manager.set_ready_status_if_requirements_met(available_snacks)
+		self.instruction_status_handler.set_ready_status_if_requirements_met(available_snacks)
 
 	def fire_instruction_if_ready(self):
-		if self.instruction_status_manager.set_fired_status_if_ready():
+		print("fire_instruction_if_ready")
+		if self.instruction_status_handler.set_fired_status_if_ready():
+			print("about to handle time")
 			self.handle_event_time()
 
 	def handle_event_time(self):
