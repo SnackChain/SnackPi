@@ -2,7 +2,7 @@ try:
 	import urequests as requests
 except ImportError:
     import requests
-from handler.type.handler import AbstractInstructionHandler
+from handler.task.handler import AbstractInstructionHandler
 from handler.operation.client import OperationClient
 from manager.networkclient import HTTPRequest, NetworkClient
 

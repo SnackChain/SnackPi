@@ -1,4 +1,4 @@
-from handler.type.request import RequestHandler
+from handler.task.request import RequestHandler
 from model.instruction import Instruction
 from handler.directive.handler import AbstractDirectiveHandler
 

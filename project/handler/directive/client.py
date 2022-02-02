@@ -1,4 +1,4 @@
-from handler.type.client import InstructionClient
+from handler.task.client import InstructionClient
 from handler.snack.input.client import SnackInputClient
 from handler.snack.output.client import SnackOutputClient
 from handler.operation.client import OperationClient
