@@ -34,7 +34,6 @@ class InstructionProvider():
 			if instruction_id in self.handlers:
 				self.handlers[instruction_id].cancel()
 			self.handlers[instruction_id] = single_instruction_handler
-		print(self.handlers)
 
 	def create_instruction_handler(self, instruction_json):
 		instruction = Instruction(**instruction_json)
@@ -52,6 +51,7 @@ class InstructionsHandler():
 		self.instruction_provider = instruction_provider
 
 	def run_pending(self, available_snacks):
+		print(self.instruction_provider.handlers)
 		for key, single_instruction_handler in self.instruction_provider.handlers:
 			single_instruction_handler.set_ready_status_if_requirements_met(available_snacks)
 			single_instruction_handler.fire_instruction_if_ready()
