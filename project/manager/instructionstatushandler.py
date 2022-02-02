@@ -47,3 +47,5 @@ class InstructionStatusHandler():
 	def set_fired_status_if_ready(self):
 		if self.status.is_ready():
 			self.status.set_fired()
+			return True
+		return False
