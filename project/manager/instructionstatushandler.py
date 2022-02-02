@@ -5,9 +5,11 @@ class InstructionStatus():
 	current = PENDING
 
 	def set_fired(self):
+		print("set fired")
 		self.current = self.FIRED
 
 	def set_ready(self):
+		print("set ready")
 		self.current = self.READY	
 
 	def is_fired(self):
