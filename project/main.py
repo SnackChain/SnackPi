@@ -26,7 +26,7 @@ class InstructionProvider():
 
 	def load_instructions_from_local(self):
 		instructions_jsons = self.mock_instructions()
-		create_instructions_handlers(instructions_jsons)
+		self.update_instructions_handlers(instructions_jsons)
 
 	def update_instructions_handlers(self, instructions_jsons):
 		for instruction_json in instructions_jsons:
