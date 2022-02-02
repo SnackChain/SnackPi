@@ -1,6 +1,6 @@
 from handler.operation.handler import AbstractOperationHandler
 
-class AdittionHandler(AbstractOperationHandler):
+class AdditionHandler(AbstractOperationHandler):
     def handle(self, operation, parameter_provider):
         if len(operation) == 3 and isinstance(operation[1], str) and operation[1] == '+':
             lhs = float(operation[0])

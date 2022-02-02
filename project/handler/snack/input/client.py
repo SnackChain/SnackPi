@@ -10,7 +10,7 @@ class SnackInputClient(AbstractDirectiveHandler):
 		input_handler = InputHandler()
 		self.handler = input_handler
 
-	def handle(self, directive, parameter_provider, snack_manager):
+	def handle(self, directive, parameter_provider, snack_communicator):
 		if directive.type == "snack.input":
 			instructions = {}
 			for snack_input_dictionary in directive.data:
@@ -22,6 +22,6 @@ class SnackInputClient(AbstractDirectiveHandler):
 				else:
 					instructions[snack_input.address] = string_to_send
 			for address, instruction in instructions.items():
-				snack_manager.write(address, instruction)
+				snack_communicator.write(address, instruction)
 		else:
-			super().handle(directive, parameter_provider, snack_manager)
+			super().handle(directive, parameter_provider, snack_communicator)

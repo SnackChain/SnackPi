@@ -19,5 +19,5 @@ class DirectiveClient():
         
         self.handler = snack_output
 
-    def handle(self, directive, parameter_provider, snack_manager):
-        self.handler.handle(directive, parameter_provider, snack_manager)
+    def handle(self, directive, parameter_provider, snack_communicator):
+        self.handler.handle(directive, parameter_provider, snack_communicator)

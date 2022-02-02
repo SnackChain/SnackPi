@@ -12,7 +12,7 @@
    },
    "directives":[
       {
-         "type":"instruction",
+         "type":"task",
          "data":{
             "type":"request",
             "payload":{

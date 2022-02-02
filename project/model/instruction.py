@@ -1,11 +1,12 @@
 ## Main structure for any snack instruction
-class SnackSetOfInstructions():
-	def __init__(self, event_time, directives, require):
+class Instruction():
+	def __init__(self, id, event_time, directives, require):
+		self.id = id
 		self.event_time = EventTime(**event_time)
-		self.directives = directives
+		self.directives = Directive(**directives)
 		self.require = Require(**require)
 
-class SnackDirective:
+class Directive:
 	def __init__(self, type, data):
 		self.type = type
 		self.data = data
@@ -15,7 +16,7 @@ class EventTime():
 		self.type = type
 		self.parameters = parameters
 
-class Instruction():
+class Task():
 	def __init__(self, type, payload = None):
 		self.type = type
 		self.payload = payload

@@ -1,4 +1,5 @@
-{
+[{
+   "id": "TVKKTRK67354",
    "event_time":{
       "type":"timer",
       "parameters":{
@@ -12,7 +13,7 @@
    },
    "directives":[
       {
-         "type":"instruction",
+         "type":"task",
          "data":{
             "type":"request",
             "payload":{
@@ -109,4 +110,4 @@
          ]
       }
    ]
-}
+}]

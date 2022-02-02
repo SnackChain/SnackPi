@@ -1,48 +1,39 @@
-from manager.instructionstatusmanager import InstructionStatusManager
+from manager.instructionstatushandler import InstructionStatusHandler
 from handler.time.client import EventTimeClient
 from handler.directive.client import DirectiveClient
 from provider.parameter import ParameterProvider
-from model.instruction import SnackDirective
+from model.instruction import Directive
 
-class InstructionManager():
+class SingleInstructionHandler():
 	instruction_status_manager = None
-	snack_set_of_instructions = None
+	snack_instruction_data = None
 	snack_communicator = None
 	cancellables = None
 
 	# init -> fire_instruction -> handle_time -> handle_directive ->? cancel
-	def __init__(self, snack_set_of_instructions, snack_communicator):
-		self.snack_set_of_instructions = snack_set_of_instructions
+	def __init__(self, snack_instruction_data, snack_communicator):
+		self.snack_instruction_data = snack_instruction_data
 		self.snack_communicator = snack_communicator
-		self.instruction_status_manager = InstructionStatusManager(self.snack_set_of_instructions.require)
+		self.instruction_status_manager = InstructionStatusHandler(self.snack_instruction_data.require)
 
 	def set_ready_status_if_requirements_met(self, available_snacks):
 		self.instruction_status_manager.set_ready_status_if_requirements_met(available_snacks)
 
 	def fire_instruction_if_ready(self):
-		if self.instruction_status_manager.is_ready_to_fire():
-			self.instruction_status_manager.set_fired_status()
-			print("Fire")
-			self.handle_time()
+		if self.instruction_status_manager.set_fired_status_if_ready():
+			self.handle_event_time()
 
-	def fire_instruction(self):
-		def start():
-			print("Start")
-			self.handle_time()
-		return start
-
-	def handle_time(self):
+	def handle_event_time(self):
 		print("Handle time")
 		event_time_client = EventTimeClient()
-		self.cancellable = event_time_client.handle(self.snack_set_of_instructions.event_time, self.handle_directive)
+		self.cancellable = event_time_client.handle(self.snack_instruction_data.event_time, self.handle_directives)
 
 	# This is called within the EventTimeClient every time the event conditions are met.
-	def handle_directive(self):
+	def handle_directives(self):
 		print("Handle directive")
 		directive_client = DirectiveClient()
 		parameter_provider = ParameterProvider()
-		for directive_data in self.snack_set_of_instructions.directives:
-			directive = SnackDirective(**directive_data)
+		for directive in self.snack_instruction_data.directives:
 			directive_client.handle(directive, parameter_provider, self.snack_communicator)
 
 	# TODO: call cancel when the snacks are disconnected

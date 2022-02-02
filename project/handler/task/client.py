@@ -9,9 +9,9 @@ class InstructionClient(AbstractDirectiveHandler):
         request_handler = RequestHandler()
         self.handler = request_handler
 
-    def handle(self, directive, parameter_provider, snack_manager):
-        if directive.type == "instruction":
-            instruction = Instruction(**directive.data)
+    def handle(self, directive, parameter_provider, snack_communicator):
+        if directive.type == "task":
+            instruction = Task(**directive.data)
             self.handler.handle(instruction, parameter_provider)
         else:
-            super().handle(directive, parameter_provider, snack_manager)
+            super().handle(directive, parameter_provider, snack_communicator)
