@@ -1,5 +1,5 @@
 from handler.task.request import RequestHandler
-from model.instruction import Instruction
+from model.instruction import Task
 from handler.directive.handler import AbstractDirectiveHandler
 
 class InstructionClient(AbstractDirectiveHandler):
