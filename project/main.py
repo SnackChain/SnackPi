@@ -2,7 +2,7 @@ import json
 import schedule
 import time
 import provider.wlan as wlan
-import provider.webserver as webserver
+from provider.websocket import SocketHandler
 import asyncio
 
 from provider.snackprovider import SnackProvider
@@ -63,6 +63,7 @@ snack_provider = SnackProvider()
 snack_communicator = SnackCommunicatior(snack_provider)
 instruction_provider = InstructionProvider(snack_communicator)
 instructions_handler = InstructionsHandler(instruction_provider) 
+socket_handler = SocketHandler(instructions_handler, snack_provider)
 
 wlan.connect_to_wifi()
 # wlan.create_access_point()
@@ -75,9 +76,7 @@ async def run_loop():
 
 event_loop = asyncio.get_event_loop()
 runner = webserver.runner(snack_provider, instructions_handler)
-event_loop.run_until_complete(runner.setup())
-site = webserver.site(runner)    
-event_loop.run_until_complete(site.start())
+event_loop.run_until_complete(socket_handler.server())
 event_loop.create_task(run_loop())
 
 event_loop.run_forever()
